@@ -1,6 +1,6 @@
 const SHEET_ID = "1ljfQBp5D3oxdL5pqnThitL811XlCgnzPCsl_hD0Va6o";
 const SHEET_NAME = "Submissions";
-const EMAIL_TO = "matei@psatta.com";
+const EMAIL_TO = "mpsatta@gmail.com";
 
 const HEADERS = [
   "submittedAt",

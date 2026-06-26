@@ -25,4 +25,4 @@ https://docs.google.com/spreadsheets/d/1ljfQBp5D3oxdL5pqnThitL811XlCgnzPCsl_hD0V
 <form class="contact-form" action="#" method="post" data-form-endpoint="YOUR_WEB_APP_URL">
 ```
 
-After that, every form submission will append a row to the Sheet and email `matei@psatta.com`.
+After that, every form submission will append a row to the Sheet and email `mpsatta@gmail.com`.
