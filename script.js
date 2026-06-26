@@ -152,5 +152,54 @@ if (!prefersReducedMotion.matches) {
 
 form?.addEventListener("submit", (event) => {
   event.preventDefault();
-  statusMessage.textContent = "Got it. This demo form is wired for the UI; hook it to your backend when ready.";
+
+  const activeTab = tabs.find((tab) => tab.classList.contains("is-active"));
+  const activePanel = panels.find((panel) => !panel.hidden);
+  const endpoint = form.dataset.formEndpoint?.trim();
+
+  if (!activePanel) {
+    statusMessage.textContent = "Something went sideways. Please refresh and try again.";
+    return;
+  }
+
+  const fields = Array.from(activePanel.querySelectorAll("input, textarea"));
+  const values = Object.fromEntries(fields.map((field) => [field.name, field.value.trim()]));
+  const nameField = fields.find((field) => field.name.endsWith("-name"));
+  const emailField = fields.find((field) => field.type === "email");
+
+  if (!nameField?.value.trim() || !emailField?.value.trim()) {
+    statusMessage.textContent = "Please add your name and email before sending.";
+    return;
+  }
+
+  const payload = {
+    submittedAt: new Date().toISOString(),
+    source: window.location.href,
+    type: activeTab?.textContent.trim() || "Unknown",
+    ...values,
+  };
+
+  if (!endpoint) {
+    statusMessage.textContent = "This form is ready, but the submissions endpoint is not connected yet.";
+    return;
+  }
+
+  statusMessage.textContent = "Sending...";
+
+  const isAppsScript = endpoint.includes("script.google.com/macros/s/");
+  fetch(endpoint, {
+    method: "POST",
+    mode: isAppsScript ? "no-cors" : "cors",
+    headers: {
+      "Content-Type": isAppsScript ? "text/plain;charset=utf-8" : "application/json",
+    },
+    body: JSON.stringify(payload),
+  })
+    .then(() => {
+      form.reset();
+      statusMessage.textContent = "Sent. I’ll read it soon.";
+    })
+    .catch(() => {
+      statusMessage.textContent = "Couldn’t send that. Please try again in a minute.";
+    });
 });

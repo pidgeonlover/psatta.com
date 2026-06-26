@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://psatta.com/sitemap.xml
