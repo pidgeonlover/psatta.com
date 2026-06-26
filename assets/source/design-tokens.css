@@ -1,0 +1,65 @@
+:root {
+  --red: #D6452D;
+  --cream: #EFE7D4;
+  --black: #111111;
+  --charcoal: #1A1A1A;
+  --grey: #7A7A7A;
+
+  --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
+  --font-body: "Inter", Arial, sans-serif;
+  --font-hand: "Caveat", "Comic Sans MS", cursive;
+
+  --page-max: 1440px;
+  --gutter: clamp(20px, 5vw, 76px);
+  --section-space: clamp(72px, 9vw, 140px);
+}
+
+.hero-about-shell {
+  position: relative;
+  overflow: visible;
+}
+
+.hero {
+  position: relative;
+  background: var(--red);
+  color: var(--cream);
+  overflow: visible;
+}
+
+.about {
+  position: relative;
+  background: var(--cream);
+  color: var(--black);
+  padding-top: clamp(72px, 8vw, 120px);
+}
+
+.hero-portrait {
+  position: absolute;
+  z-index: 3;
+  bottom: -4rem;
+  right: clamp(2rem, 8vw, 8rem);
+  max-height: min(78vh, 850px);
+  width: auto;
+  object-fit: contain;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 5vw, 72px);
+}
+
+@media (max-width: 700px) {
+  .hero-portrait {
+    position: relative;
+    right: auto;
+    bottom: -2rem;
+    margin-left: auto;
+    display: block;
+    max-height: 55vh;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
