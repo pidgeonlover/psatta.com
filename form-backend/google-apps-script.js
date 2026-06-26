@@ -12,6 +12,9 @@ const HEADERS = [
   "linkedin",
   "answer",
   "source",
+  "emailStatus",
+  "emailSentAt",
+  "emailError",
 ];
 
 function doPost(event) {
@@ -20,8 +23,16 @@ function doPost(event) {
   const sheet = getSubmissionSheet_();
 
   ensureHeaders_(sheet);
+  row.emailStatus = "pending";
   sheet.appendRow(HEADERS.map((header) => row[header] || ""));
-  sendNotification_(row);
+
+  const rowNumber = sheet.getLastRow();
+  try {
+    sendNotification_(row);
+    updateEmailStatus_(sheet, rowNumber, "sent", new Date().toISOString(), "");
+  } catch (error) {
+    updateEmailStatus_(sheet, rowNumber, "failed", "", error && error.message ? error.message : String(error));
+  }
 
   return ContentService
     .createTextOutput(JSON.stringify({ ok: true }))
@@ -62,10 +73,16 @@ function ensureHeaders_(sheet) {
   const hasHeaders = HEADERS.every((header, index) => firstRow[index] === header);
 
   if (!hasHeaders) {
-    sheet.clear();
     sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
     sheet.setFrozenRows(1);
   }
+}
+
+function updateEmailStatus_(sheet, rowNumber, status, sentAt, errorMessage) {
+  const emailStatusColumn = HEADERS.indexOf("emailStatus") + 1;
+  sheet
+    .getRange(rowNumber, emailStatusColumn, 1, 3)
+    .setValues([[status, sentAt, errorMessage]]);
 }
 
 function sendNotification_(row) {
