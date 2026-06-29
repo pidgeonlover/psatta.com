@@ -524,6 +524,24 @@ h1 span {
   line-height: 1;
 }
 
+.entity-bio {
+  min-width: 0;
+  width: 100%;
+  max-width: 62rem;
+  margin-top: clamp(1.7rem, 3vw, 2.65rem);
+  padding-top: clamp(1rem, 1.6vw, 1.4rem);
+  border-top: 1px solid rgba(198, 31, 20, 0.46);
+  font-size: clamp(1.08rem, 1.35vw, 1.45rem);
+  font-weight: 900;
+  letter-spacing: -0.052em;
+  line-height: 1.12;
+  overflow-wrap: break-word;
+}
+
+.entity-bio strong {
+  color: var(--ink-red);
+}
+
 .bridge {
   padding: clamp(1.3rem, 2.7vw, 2.25rem) var(--gutter) clamp(1.7rem, 3.6vw, 3rem);
 }
@@ -1132,6 +1150,15 @@ textarea:focus-visible,
   .proof-point p {
     max-width: 17.5rem;
     font-size: 1rem;
+  }
+
+  .entity-bio {
+    width: auto;
+    max-width: 20rem;
+    margin-top: 1.45rem;
+    font-size: 0.93rem;
+    letter-spacing: -0.032em;
+    line-height: 1.08;
   }
 
   .bridge {

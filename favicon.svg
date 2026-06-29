@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Matei Psatta">
+  <defs>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="4" seed="8" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values=".25"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 .18"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <rect width="96" height="96" fill="#c92b1b"/>
+  <rect width="96" height="96" filter="url(#grain)" opacity=".48" style="mix-blend-mode:multiply"/>
+  <path d="M0 0h96v96H0z" fill="none" stroke="rgba(17,17,17,.22)" stroke-width="10"/>
+  <text x="48" y="58" fill="#efe7d4" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="900" text-anchor="middle">MP</text>
+</svg>
