@@ -663,7 +663,7 @@ h1 span {
 
 .landscape-card img {
   width: 100%;
-  filter: grayscale(1) contrast(1.1);
+  filter: saturate(0.92) contrast(1.04) brightness(0.96);
 }
 
 .contact-note {
